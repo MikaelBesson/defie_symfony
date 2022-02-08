@@ -16,7 +16,7 @@ class UserController extends AbstractController
      * @return Response
      * TODO Définissez la route pour accéder à cette fonction du controller UserController
      */
-    #[]
+    #[Route("/list", name: 'list')]
     public function list(): Response
     {
         $message = '
@@ -32,6 +32,7 @@ class UserController extends AbstractController
             </table>
         ';
         // TODO Retournez une Response, renvoyer le code HTML présent dans la variable $message.
+        return new Response($message);
     }
 
 
@@ -41,6 +42,7 @@ class UserController extends AbstractController
      * @return Response
      * TODO Définissez cette route, n'oubliez pas de définir le paramètre pour être en mesure d'éditer l'utilisateur.
      */
+    #[Route("/edit/{userID}", name:'edit')]
     public function edit(int $userID): Response
     {
         $html = '
@@ -48,6 +50,7 @@ class UserController extends AbstractController
         ';
 
         // TODO Retournez une Response contenant le code HTML spécifié dans la variable $html
+        return new Response($html);
     }
 
 
@@ -57,13 +60,21 @@ class UserController extends AbstractController
      * @return Response
      * TODO Définissez cette route.
      */
+    #[Route("/delete/{userId}", name:'delete')]
     public function delete(int $userId): Response
     {
         $html = '
-            <div class="success">L\'utilisateur ' . $userID . ' a été supprimé avec succès</div>
+            <div class="success">L\'utilisateur ' . $userId . ' a été supprimé avec succès</div>
         ';
 
         // TODO Retournez une Response contenant le code HTML spécifié dans la variable $html
+        return new Response($html);
+    }
+
+    #[Route("/id/{id}", name:'id')]
+    public function afficheId(int $id): Response{
+        $html = '<span>' . $id . '</span>';
+        return new Response($html);
     }
 
 }
